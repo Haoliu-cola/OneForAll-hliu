@@ -41,8 +41,14 @@ def get_data(dset):
     node_texts, label_texts = get_text(cur_path)
     edge_text = ["feature edge. wikipedia page link"]
     prompt_text = ["prompt node. node classification of wikipedia entry category"]
-    prompt_edge_text = ["prompt edge."]
+    prompt_edge_text = ["prompt edge.", "prompt edge. edge for query graph that is our target",
+                        "prompt edge. edge for support graph that is an example"]
     prompt_text_map = {"e2e_node": {"noi_node_text_feat": ["noi_node_text_feat", [0]],
                                     "class_node_text_feat": ["class_node_text_feat", torch.arange(len(label_texts))],
-                                    "prompt_edge_text_feat": ["prompt_edge_text_feat", [0]]}}
+                                    "prompt_edge_text_feat": ["prompt_edge_text_feat", [0]]},
+                       "lr_node": {
+                           "noi_node_text_feat": ["noi_node_text_feat", [0]],
+                           "class_node_text_feat": ["class_node_text_feat", torch.arange(len(label_texts))],
+                           "prompt_edge_text_feat": ["prompt_edge_text_feat", [0, 1, 2]]},
+                       }
     return ([pyg_data.data], [node_texts, edge_text, prompt_text, label_texts, prompt_edge_text, ], prompt_text_map,)

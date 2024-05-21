@@ -89,5 +89,9 @@ def get_data(dset):
                                                              len(label_text) + len(edge_label_text) + len(
                                                                  logic_label_text))],
                        "prompt_edge_text_feat": ["prompt_edge_text_feat", [0]]},
+         "lr_link": {"noi_node_text_feat": ["noi_node_text_feat", [1]],
+                     "class_node_text_feat": ["class_node_text_feat",
+                                              torch.arange(len(label_text), len(label_text) + len(edge_label_text))],
+                     "prompt_edge_text_feat": ["prompt_edge_text_feat", [0, 0, 0, 1, 2]]},
          }
     )

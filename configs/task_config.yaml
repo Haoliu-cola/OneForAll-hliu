@@ -272,6 +272,27 @@ arxiv_fs: &arxiv_fs
       split_name: test
       dataset: cora_fs_70
 
+arxiv_zs: &arxiv_zs
+  <<: *LR-node
+  dataset: arxiv_fs
+  eval_set_constructs:
+    - stage: train
+      split_name: train
+      dataset: arxiv_fs
+    - stage: valid
+      split_name: valid
+      dataset: cora_fs_70
+    - stage: test
+      split_name: test
+      dataset: wikics_fs_100
+    - stage: test
+      split_name: test
+      dataset: pubmed_fs_30
+    - stage: test
+      split_name: test
+      dataset: cora_fs_70
+
+
 LR-link: &LR-link
   eval_pool_mode: mean
   eval_set_constructs:
@@ -365,6 +386,24 @@ FB15K237_fs: &FB15K237_fs
     - stage: test
       split_name: test
       dataset: WN18RR_fs_50
+
+FB15K237_zs: &FB15K237_zs
+  <<: *LR-link
+  dataset: FB15K237_fs
+  eval_set_constructs:
+    - stage: train
+      split_name: train
+      dataset: FB15K237_fs
+    - stage: valid
+      split_name: valid
+      dataset: WN18RR_fs_110
+    - stage: test
+      split_name: test
+      dataset: WN18RR_fs_110
+    - stage: test
+      split_name: test
+      dataset: cora_link_fs_20
+
 
 LR-graph: &LR-graph
   eval_pool_mode: mean

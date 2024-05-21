@@ -40,7 +40,8 @@ def get_data(dset):
         "prompt node. node classification on the paper's category"
     ]
 
-    prompt_edge_text = ["prompt edge."]
+    prompt_edge_text = ["prompt edge.", "prompt edge. edge for query graph that is our target",
+                        "prompt edge. edge for support graph that is an example"]
     return (
         [new_data],
         [
@@ -56,5 +57,8 @@ def get_data(dset):
          "e2e_link": {"noi_node_text_feat": ["noi_node_text_feat", [1]],
                       "class_node_text_feat": ["class_node_text_feat",
                                                torch.arange(len(label_text), len(label_text) + len(edge_label_text))],
-                      "prompt_edge_text_feat": ["prompt_edge_text_feat", [0]]}}
+                      "prompt_edge_text_feat": ["prompt_edge_text_feat", [0]]},
+         "lr_node": {"noi_node_text_feat": ["noi_node_text_feat", [0]],
+                     "class_node_text_feat": ["class_node_text_feat", torch.arange(len(label_text))],
+                     "prompt_edge_text_feat": ["prompt_edge_text_feat", [0, 1, 2]]}}
     )

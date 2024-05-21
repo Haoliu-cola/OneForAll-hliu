@@ -334,11 +334,73 @@ cora_fs_70:
     no_class_node: True
   num_classes: 7
 
+pubmed_fs: &pubmed_fs
+  <<: *LR-node
+  dataset_name: Pubmed
+  dataset_splitter: CiteFSSplitter
+  process_label_func: process_fewshot_label
+  args:
+    walk_length: null
+    single_prompt_edge: True
+    n_way: 2
+    k_shot: 1
+    base_construct: ConstructNodeCls
+    no_class_node: True
+  num_classes: 3
+
+pubmed_fs_30:
+  <<: *pubmed_fs
+  args:
+    walk_length: null
+    single_prompt_edge: True
+    n_way: 3
+    k_shot: 0
+    base_construct: ConstructNodeCls
+    no_class_node: True
+  num_classes: 3
+
+wikics_fs: &wikics_fs
+  <<: *LR-node
+  dataset_name: wikics
+  dataset_splitter: CiteFSSplitter
+  process_label_func: process_fewshot_label
+  args:
+    walk_length: null
+    single_prompt_edge: True
+    n_way: 2
+    k_shot: 1
+    base_construct: ConstructNodeCls
+    no_class_node: True
+  num_classes: 10
+
+wikics_fs_100:
+  <<: *wikics_fs
+  args:
+    walk_length: null
+    single_prompt_edge: True
+    n_way: 10
+    k_shot: 0
+    base_construct: ConstructNodeCls
+    no_class_node: True
+  num_classes: 10
+
 
 LR-link: &LR-link
   task_level: lr_link
   construct: ConstructFSTask
   preprocess: KGConstructEdgeList
+  args:
+    walk_length: null
+    single_prompt_edge: True
+    max_nodes_per_hop: 100
+  eval_metric: acc
+  eval_func: classification_func
+  eval_mode: max
+
+LR-cite-link: &LR-cite-link
+  task_level: lr_link
+  construct: ConstructFSTask
+  preprocess: LinkConstructGraph
   args:
     walk_length: null
     single_prompt_edge: True
@@ -527,7 +589,52 @@ WN18RR_fs_50:
     base_construct: ConstructKG
     no_class_node: True
     remove_edge: False
-  num_classes: 5
+  num_classes: 11
+
+WN18RR_fs_110:
+  <<: *WN18RR_fs
+  args:
+    walk_length: null
+    single_prompt_edge: True
+    n_way: 11
+    k_shot: 0
+    base_construct: ConstructKG
+    no_class_node: True
+    remove_edge: False
+  num_classes: 11
+
+#cora_link_fs: &cora_link_fs
+#  <<: *LR-cite-link
+#  dataset_name: Cora
+#  dataset_splitter: CiteLinkSplitter
+#  process_label_func: process_fewshot_label
+#  args:
+#    walk_length: null
+#    single_prompt_edge: True
+#    n_way: 5
+#    k_shot: 1
+#    base_construct: ConstructLinkCls
+#    no_class_node: True
+#    remove_edge: False
+#  num_classes: 2
+#
+#cora_link_fs_20:
+#  <<: *cora_link_fs
+#  args:
+#    walk_length: null
+#    single_prompt_edge: True
+#    n_way: 2
+#    k_shot: 0
+#    base_construct: ConstructLinkCls
+#    no_class_node: True
+#    remove_edge: False
+#  num_classes: 2
+
+cora_link_fs_20:
+  <<: *cora_link
+  eval_metric: acc
+  eval_func: classification_func
+  eval_mode: max
 
 
 LR-graph: &LR-graph

@@ -44,5 +44,7 @@ class SingleGraphOFADataset(OFAPygDataset):
             return {"f2n": [1, [0]],
                     "n2f": [3, [0]],
                     }
+        elif mode == "lr_link":
+            return {"f2n": [1, [0]], "n2f": [3, [0]]}
         elif mode == "e2e_link":
             return {"f2n": [1, [0]], "n2f": [3, [0]], "n2c": [2, [0]], "c2n": [4, [0]]}

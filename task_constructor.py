@@ -381,7 +381,7 @@ none_process_label = None
 
 class UnifiedTaskConstructor:
     def __init__(self, tasks: list[str], load_texts: bool, encoder: utils.SentenceEncoder,
-                 task_config_lookup: dict, data_config_lookup: dict, root="cache_data",
+                 task_config_lookup: dict, data_config_lookup: dict, root="/project/tantra/feng.jiarui/OneForAll/cache_data",
                  batch_size=256, sample_size=-1, eval_batch_size=None):
         """
         Construct tasks from a dictionary of dataset configurations. A task must contain a train dataset, but can

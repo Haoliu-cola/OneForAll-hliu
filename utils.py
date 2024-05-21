@@ -11,7 +11,7 @@ from models.model import LLMModel
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 class SentenceEncoder:
-    def __init__(self, llm_name, cache_dir="cache_data/model", batch_size=1, multi_gpu=False):
+    def __init__(self, llm_name, cache_dir="/project/tantra/feng.jiarui/dataset_dev/model_data/model", batch_size=1, multi_gpu=False):
         self.llm_name = llm_name
         self.device, _ = get_available_devices()
         self.batch_size = batch_size
