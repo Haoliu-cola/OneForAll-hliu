@@ -311,11 +311,11 @@ class LLMModel(torch.nn.Module):
         return model, tokenizer
 
     def pooling(self, outputs, text_tokens=None):
-        if self.llm_name in ["BERT", "ST", "e5"]:
-            return F.normalize(mean_pooling(outputs, text_tokens["attention_mask"]), p=2, dim=1)
+        # if self.llm_name in ["BERT", "ST", "e5"]:
+        return F.normalize(mean_pooling(outputs, text_tokens["attention_mask"]), p=2, dim=1)
 
-        else:
-            return outputs[text_tokens["input_ids"] == 2] # llama2 EOS token
+        # else:
+        #     return outputs[text_tokens["input_ids"] == 2] # llama2 EOS token
 
     def forward(self, text_tokens):
         outputs = self.model(input_ids=text_tokens["input_ids"],
